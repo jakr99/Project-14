@@ -1,0 +1,5 @@
+1. There is a memory leak where the destructor for the list class is not properly freeing the memory used by the linked list. 
+2. the memory for the copied list is not being correctly deallocated
+1. it shows the memory leaks
+2. in the prob2 file both the original and the copied vector point to the same dynamic array. The code also uses dynamic memory allocation to create instances of vector, but it leads to memory leaks.
+  

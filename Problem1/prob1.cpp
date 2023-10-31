@@ -29,14 +29,14 @@ class List
     }
 
     // Destructor
-    ~List()
-    {
-      if(nxt)
-      {
-        delete nxt;
-      }
+    ~List() {
+        List* current = this;
+        while (current != nullptr) {
+            List* temp = current;
+            current = current->nxt;
+            delete temp;
+        }
     }
-
     // Append a new node to the linked list
     void append(int v)
     {

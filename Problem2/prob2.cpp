@@ -1,5 +1,5 @@
 #include<iostream>
-#include<stdexcept> // for invalid_argument
+#include<stdexcept>
 using namespace std;
 
 class Vector
@@ -10,32 +10,36 @@ class Vector
     {
       sz = 4;
       max = 0;
-      array = new int[4];
+      array = new int[sz];
     }
 
-    // Copy Constructor
+    
     Vector(const Vector& v)
     {
       sz = v.sz;
       max = v.max;
-      array = v.array;
+      array = new int[sz]; 
+      for (int i = 0; i < max; i++)
+      {
+        array[i] = v.array[i];
+      }
     }
 
-    // Destructor
+
     ~Vector()
     {
-      delete [] array;
+      delete[] array;
     }
 
-    // Add elements to the vector
+    
     void push_back(int v)
     {
-      // Expand vector if needed
-      if(max == sz)
+      
+      if (max == sz)
       {
         sz = sz * 2;
         int* new_array = new int[sz];
-        for(int i = 0; i < max; i++)
+        for (int i = 0; i < max; i++)
         {
           new_array[i] = array[i];
         }
@@ -48,10 +52,10 @@ class Vector
       max++;
     }
 
-    // Read elements of the vector
+    
     int& operator[](const int idx)
     {
-      if(idx < 0 || idx >= max)
+      if (idx < 0 || idx >= max)
       {
         throw invalid_argument("Index out of range");
       }
@@ -67,23 +71,19 @@ class Vector
 
 int main()
 {
-  Vector* vect = new Vector;
+  Vector vect; 
 
-  for(int i = 0; i < 10; i++)
+  for (int i = 0; i < 10; i++)
   {
-    vect->push_back(i);
+    vect.push_back(i);
   }
 
-  Vector* copy = new Vector(*vect);
+  Vector copy = vect; 
 
-  delete vect;
-
-  for(int i = 0; i < 10; i++)
+  for (int i = 0; i < 10; i++)
   {
-    cout << (*copy)[i] << endl;
+    cout << copy[i] << endl;
   }
 
   return 0;
 }
-
-
